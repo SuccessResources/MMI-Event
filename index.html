@@ -402,12 +402,8 @@
           <span class="compare-price-small">$19 ✓ secured</span>
         </div>
         <div class="compare-row highlight">
-          <span class="compare-label">+ In-Person upgrade</span>
-          <span class="compare-price-add">+ $39</span>
-        </div>
-        <div class="compare-row total">
-          <span class="compare-label">Total to attend in person</span>
-          <span class="compare-price-total">$58</span>
+          <span class="compare-label">+ In-Person ticket</span>
+          <span class="compare-price-add" id="upsellLivePrice">29</span>
         </div>
       </div>
       <div id="stripeUpsellContainer">
@@ -842,35 +838,46 @@ const TRAINERS = {
       { num: '28',    label: 'Age at Financial Freedom' }
     ]
   },
-  // ── Duplicate this block for each additional trainer ──────────────────────
-  // jane: {
-  //   initials: 'JS',
-  //   name:     'Jane <strong>Smith</strong>',
-  //   title:    'Business Coach · MMI Certified Trainer',
-  //   bio:      'Jane has coached over 20,000 entrepreneurs...',
-  //   stats: [
-  //     { num: '20K+', label: 'People Coached' },
-  //     { num: '30+',  label: 'Countries'      },
-  //     { num: '5',    label: 'Years with MMI' }
-  //   ]
-  // },
+  mac: {
+    initials: 'MA',
+    name:     'Mac <strong>Attram</strong>',
+    title:    'Entrepreneur · Business Coach · MMI Certified Trainer',
+    bio:      `Mac Attram is a seasoned entrepreneur and business coach who has helped thousands of business owners break through the financial ceilings holding them back.<br><br>
+               As a certified MMI trainer, Mac brings the same transformational framework that has changed millions of lives — delivered with energy, clarity, and real-world application.`,
+    stats: [
+      { num: '10K+', label: 'People Coached' },
+      { num: '20+',  label: 'Countries'       },
+      { num: '15+',  label: 'Years Experience'}
+    ]
+  },
+  alan: {
+    initials: 'AH',
+    name:     'Alan P. <strong>Hill</strong>',
+    title:    'Entrepreneur · Speaker · MMI Certified Trainer',
+    bio:      `Alan P. Hill is a dynamic entrepreneur and speaker who has built multiple successful businesses from the ground up.<br><br>
+               As a certified MMI trainer, Alan delivers the Millionaire Mind Intensive with passion and precision — helping attendees identify and clear the money blocks that have kept them stuck for years.`,
+    stats: [
+      { num: '10K+', label: 'People Coached' },
+      { num: '15+',  label: 'Countries'       },
+      { num: '10+',  label: 'Years Experience'}
+    ]
+  }
 };
 
 // ─── EVENT DATA ───────────────────────────────────────────────────────────────
 const EVENTS = [
-  // tzOffset = GMT offset in hours (used for timezone-based routing for virtual attendees)
-  {city:"Kuala Lumpur", country:"Malaysia",       flag:"🇲🇾", dates:"1–3 May 2026",      time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-05-01T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPf03IMbI04nnt8ezfDNzTf", stripeAccount:"my", trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
-  {city:"Malaga",        country:"Spain",          flag:"🇪🇸", dates:"22–24 May 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-05-22T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPfwLGY6RiRFzHXmZsZbpnQ", stripeAccount:"eu", trainer:"arnon", geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
-  {city:"Warsaw",        country:"Poland",         flag:"🇵🇱", dates:"12–14 June 2026",   time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-06-12T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPfzBGY6RiRFzHXHPK0Dekh", stripeAccount:"eu", trainer:"arnon", geo:["PL","CZ","SK","HU","UA","BY","LT","LV","EE","MD"],featured:false},
-  {city:"London",        country:"United Kingdom", flag:"🇬🇧", dates:"3–5 July 2026",     time:"9am–8pm GMT+1", tzOffset:1,  eventDate:new Date("2026-07-03T09:00:00+01:00"), stripeButtonId:"buy_btn_1TPg1wGY6RiRFzHXgR3Q6DjY", stripeAccount:"eu", trainer:"arnon", geo:["GB","IE"],featured:false},
-  {city:"Cologne",       country:"Germany",        flag:"🇩🇪", dates:"10–12 July 2026",   time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-07-10T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg3zGY6RiRFzHX0gvy1rME", stripeAccount:"eu", trainer:"arnon", geo:["DE","AT","CH","LI","LU"],featured:false},
-  {city:"Johor Bahru",   country:"Malaysia",       flag:"🇲🇾", dates:"31 Jul–2 Aug 2026", time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-07-31T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPfYcIMbI04nnt8A0I6vlBn", stripeAccount:"my", trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
-  {city:"Geneva",        country:"Switzerland",    flag:"🇨🇭", dates:"11–13 Sep 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-09-11T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg5fGY6RiRFzHXOMfYTUrj", stripeAccount:"eu", trainer:"arnon", geo:["CH","LI","FR","MC"],featured:false},
-  {city:"Madrid",        country:"Spain",          flag:"🇪🇸", dates:"25–27 Sep 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-09-25T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg6YGY6RiRFzHXu0QHzUyg", stripeAccount:"eu", trainer:"arnon", geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
-  {city:"Rotterdam",     country:"Netherlands",    flag:"🇳🇱", dates:"15–17 Oct 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-10-15T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg7TGY6RiRFzHX0u7ZIUEv", stripeAccount:"eu", trainer:"arnon", geo:["NL","BE","DK","SE","NO","FI","IS"],featured:false},
-  {city:"Kuala Lumpur",  country:"Malaysia",       flag:"🇲🇾", dates:"30 Oct–1 Nov 2026", time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-10-30T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPfbSIMbI04nnt8RtV6MNBj", stripeAccount:"my", trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
-  {city:"Birmingham",    country:"United Kingdom", flag:"🇬🇧", dates:"6–8 Nov 2026",      time:"9am–8pm GMT+0", tzOffset:0,  eventDate:new Date("2026-11-06T09:00:00+00:00"), stripeButtonId:"buy_btn_1TPg8uGY6RiRFzHXTrN2kpQe", stripeAccount:"eu", trainer:"arnon", geo:["GB","IE"],featured:false},
-  {city:"Brussels",      country:"Belgium",        flag:"🇧🇪", dates:"20–22 Nov 2026",    time:"9am–8pm GMT+1", tzOffset:1,  eventDate:new Date("2026-11-20T09:00:00+01:00"), stripeButtonId:"buy_btn_1TPg9lGY6RiRFzHX2buGBRix", stripeAccount:"eu", trainer:"arnon", geo:["BE","FR","MC","LU","BG","RO","BH","KW","QA","OM","SA","AE","JO","IL","EG","LB","IQ","IR","SY","TR","AZ","GE","AM","KZ","UZ","TM","TJ","KG"],featured:false}
+  {city:"Kuala Lumpur", country:"Malaysia",       flag:"🇲🇾", dates:"1–3 May 2026",      time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-05-01T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPf03IMbI04nnt8ezfDNzTf", liveButtonId:"buy_btn_1TPiA0GY6RiRFzHXJp4S4uUT", livePrice:"29", liveCurrency:"USD", stripeAccount:"my", trainer:"alan",  geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
+  {city:"Malaga",        country:"Spain",          flag:"🇪🇸", dates:"22–24 May 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-05-22T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPfwLGY6RiRFzHXmZsZbpnQ", liveButtonId:"buy_btn_1TPidGGY6RiRFzHXxDavnL0k", livePrice:"29", liveCurrency:"EUR", stripeAccount:"eu", trainer:"mac",   geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
+  {city:"Warsaw",        country:"Poland",         flag:"🇵🇱", dates:"12–14 June 2026",   time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-06-12T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPfzBGY6RiRFzHXHPK0Dekh", liveButtonId:"buy_btn_1TPifiGY6RiRFzHXa9sf6SZq", livePrice:"29", liveCurrency:"EUR", stripeAccount:"eu", trainer:"mac",   geo:["PL","CZ","SK","HU","UA","BY","LT","LV","EE","MD"],featured:false},
+  {city:"London",        country:"United Kingdom", flag:"🇬🇧", dates:"3–5 July 2026",     time:"9am–8pm GMT+1", tzOffset:1,  eventDate:new Date("2026-07-03T09:00:00+01:00"), stripeButtonId:"buy_btn_1TPg1wGY6RiRFzHXgR3Q6DjY", liveButtonId:"buy_btn_1TPigsGY6RiRFzHXP19aoxC1", livePrice:"29", liveCurrency:"GBP", stripeAccount:"eu", trainer:"arnon", geo:["GB","IE"],featured:false},
+  {city:"Berlin",        country:"Germany",        flag:"🇩🇪", dates:"10–12 July 2026",   time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-07-10T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg3zGY6RiRFzHX0gvy1rME", liveButtonId:"buy_btn_1TPiidGY6RiRFzHXkEBBOhRq", livePrice:"29", liveCurrency:"EUR", stripeAccount:"eu", trainer:"mac",   geo:["DE","AT","CH","LI","LU"],featured:false},
+  {city:"Johor Bahru",   country:"Malaysia",       flag:"🇲🇾", dates:"31 Jul–2 Aug 2026", time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-07-31T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPfYcIMbI04nnt8A0I6vlBn", liveButtonId:"buy_btn_1TPik6GY6RiRFzHXONPpVmIP", livePrice:"29", liveCurrency:"USD", stripeAccount:"my", trainer:"mac",   geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
+  {city:"Geneva",        country:"Switzerland",    flag:"🇨🇭", dates:"11–13 Sep 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-09-11T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg5fGY6RiRFzHXOMfYTUrj", liveButtonId:"buy_btn_1TPilKGY6RiRFzHXuortjd9R", livePrice:"29", liveCurrency:"EUR", stripeAccount:"eu", trainer:"arnon", geo:["CH","LI","FR","MC"],featured:false},
+  {city:"Madrid",        country:"Spain",          flag:"🇪🇸", dates:"25–27 Sep 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-09-25T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg6YGY6RiRFzHXu0QHzUyg", liveButtonId:"buy_btn_1TPimRGY6RiRFzHXZGLag6XS", livePrice:"29", liveCurrency:"EUR", stripeAccount:"eu", trainer:"arnon", geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
+  {city:"Rotterdam",     country:"Netherlands",    flag:"🇳🇱", dates:"15–17 Oct 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-10-15T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg7TGY6RiRFzHX0u7ZIUEv", liveButtonId:"buy_btn_1TPiooGY6RiRFzHXzgyOL3Mp", livePrice:"29", liveCurrency:"EUR", stripeAccount:"eu", trainer:"mac",   geo:["NL","BE","DK","SE","NO","FI","IS"],featured:false},
+  {city:"Kuala Lumpur",  country:"Malaysia",       flag:"🇲🇾", dates:"30 Oct–1 Nov 2026", time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-10-30T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPfbSIMbI04nnt8RtV6MNBj", liveButtonId:"buy_btn_1TPipzGY6RiRFzHX13MKdfjP", livePrice:"29", liveCurrency:"USD", stripeAccount:"my", trainer:"mac",   geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
+  {city:"Birmingham",    country:"United Kingdom", flag:"🇬🇧", dates:"6–8 Nov 2026",      time:"9am–8pm GMT+0", tzOffset:0,  eventDate:new Date("2026-11-06T09:00:00+00:00"), stripeButtonId:"buy_btn_1TPg8uGY6RiRFzHXTrN2kpQe", liveButtonId:"buy_btn_1TPir9GY6RiRFzHXttsdQVRy", livePrice:"29", liveCurrency:"GBP", stripeAccount:"eu", trainer:"arnon", geo:["GB","IE"],featured:false},
+  {city:"Brussels",      country:"Belgium",        flag:"🇧🇪", dates:"20–22 Nov 2026",    time:"9am–8pm GMT+1", tzOffset:1,  eventDate:new Date("2026-11-20T09:00:00+01:00"), stripeButtonId:"buy_btn_1TPg9lGY6RiRFzHX2buGBRix", liveButtonId:"buy_btn_1TPisKGY6RiRFzHXGoW0UU9e", livePrice:"29", liveCurrency:"EUR", stripeAccount:"eu", trainer:"arnon", geo:["BE","FR","MC","LU","BG","RO","BH","KW","QA","OM","SA","AE","JO","IL","EG","LB","IQ","IR","SY","TR","AZ","GE","AM","KZ","UZ","TM","TJ","KG"],featured:false}
 ];
 
 // ─── STRIPE CONFIG ────────────────────────────────────────────────────────────
@@ -887,7 +894,7 @@ const CITY_SLUGS = {
   'kuala-lumpur': 'Kuala Lumpur',
   'warsaw':       'Warsaw',
   'london':       'London',
-  'cologne':      'Cologne',
+  'berlin':       'Berlin',
   'johor-bahru':  'Johor Bahru',
   'geneva':       'Geneva',
   'madrid':       'Madrid',
@@ -1027,13 +1034,6 @@ function buildEventsGrid(featuredEvent, featuredLabel) {
 
 // ─── STRIPE CHECKOUT MODAL ───────────────────────────────────────────────────
 
-// Upsell buy button IDs — add once created in Stripe Dashboard
-// Use the same stripeAccount as the main event for that city
-const UPSELL_INPERSON = {
-  my: { buttonId: '' }, // Malaysia entity — add buy_btn_xxx
-  eu: { buttonId: '' }  // European entity — add buy_btn_xxx
-};
-
 function openCheckout(ev) {
   if (!ev) return;
 
@@ -1069,16 +1069,22 @@ function openCheckout(ev) {
   // ── In-Person upsell button (right panel) ──────────────────────
   const upsellContainer = document.getElementById('stripeUpsellContainer');
   upsellContainer.innerHTML = '';
-  const upsellId = UPSELL_INPERSON[acct] && UPSELL_INPERSON[acct].buttonId;
-  if (upsellId && upsellId.startsWith('buy_btn_') && pubKey && !pubKey.includes('YOUR_')) {
+
+  // Update price display from event data
+  const livePriceEl = document.getElementById('upsellLivePrice');
+  if (livePriceEl) livePriceEl.textContent = ev.livePrice && ev.liveCurrency
+    ? `${ev.liveCurrency} ${ev.livePrice}`
+    : 'Contact us';
+
+  if (ev.liveButtonId && ev.liveButtonId.startsWith('buy_btn_') && pubKey && !pubKey.includes('YOUR_')) {
     const upsellBtn = document.createElement('stripe-buy-button');
-    upsellBtn.setAttribute('buy-button-id', upsellId);
+    upsellBtn.setAttribute('buy-button-id', ev.liveButtonId);
     upsellBtn.setAttribute('publishable-key', pubKey);
     upsellContainer.appendChild(upsellBtn);
   } else {
     upsellContainer.innerHTML = `
       <div style="text-align:center;padding:16px;border:1px dashed rgba(201,168,76,0.25);width:100%;font-size:12px;color:var(--text-muted)">
-        In-Person Upgrade button — add Stripe ID to activate
+        In-Person ticket — add Live Event Stripe ID to activate
       </div>`;
   }
 
@@ -1141,7 +1147,7 @@ function switchDay(idx, btn) {
     const controller = new AbortController();
     const timeout    = setTimeout(() => controller.abort(), 3000);
 
-    const res  = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+    const res  = await fetch('https://ipapi.co/json/?key=vmENJ3PceUgWfONVOujw2t8vHP1SHpeTagvsDHKksFnoHLDjSh', { signal: controller.signal });
     clearTimeout(timeout);
     const data = await res.json();
     const geoEvent = findNearestEvent(
