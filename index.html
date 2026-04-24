@@ -291,17 +291,9 @@
   .inperson-badge{background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--gold)}
   .checkout-mode-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;font-weight:600}
 
-  /* price comparison table on right side */
-  .checkout-upsell-compare{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.07);padding:16px;margin-bottom:20px}
-  .compare-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
-  .compare-row:last-child{border-bottom:none}
-  .compare-label{font-size:13px;color:var(--text-dim)}
-  .compare-price-small{font-size:13px;color:var(--green,#2ecc71);font-weight:600}
-  .compare-price-add{font-size:15px;font-weight:700;color:var(--gold-light)}
-  .compare-row.highlight .compare-label{color:var(--white);font-weight:600}
-  .compare-row.total{padding-top:10px}
-  .compare-row.total .compare-label{font-size:13px;font-weight:700;color:var(--white)}
-  .compare-price-total{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--gold-light)}
+  .checkout-upsell-price{display:flex;align-items:baseline;gap:10px;margin-bottom:20px}
+  .checkout-upsell-price-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:var(--gold-light);line-height:1}
+  .checkout-upsell-price-note{font-size:12px;color:var(--text-muted)}
 
   /* Responsive modal */
   @media(max-width:700px){
@@ -396,15 +388,9 @@
         <li>In-person networking and peer connections</li>
         <li>Access to VIP evening social after Day 1</li>
       </ul>
-      <div class="checkout-upsell-compare">
-        <div class="compare-row">
-          <span class="compare-label">Online ticket</span>
-          <span class="compare-price-small">$19 ✓ secured</span>
-        </div>
-        <div class="compare-row highlight">
-          <span class="compare-label">+ In-Person ticket</span>
-          <span class="compare-price-add" id="upsellLivePrice">29</span>
-        </div>
+      <div class="checkout-upsell-price">
+        <span class="checkout-upsell-price-num" id="upsellLivePrice">29</span>
+        <span class="checkout-upsell-price-note">live event ticket · today only</span>
       </div>
       <div id="stripeUpsellContainer">
         <div style="text-align:center;padding:16px;border:1px dashed rgba(201,168,76,0.25);width:100%;font-size:12px;color:var(--text-muted)">In-Person Upgrade — add Stripe ID to activate</div>
