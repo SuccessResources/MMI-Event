@@ -876,24 +876,37 @@ function initPage(featuredEvent, source) {
 }
 
 // ─── COUNTDOWN ───────────────────────────────────────────────────────────────
+let countdownInterval = null;
+
 function startCountdown(targetDate) {
+  if (countdownInterval) clearInterval(countdownInterval);
+
+  const cdDays  = document.getElementById('cdDays');
+  const cdHours = document.getElementById('cdHours');
+  const cdMins  = document.getElementById('cdMins');
+  const cdSecs  = document.getElementById('cdSecs');
+  const cdWrap  = document.getElementById('countdown');
+  if (!cdDays || !cdHours || !cdMins || !cdSecs) return;
+
   function update() {
     const diff = targetDate - new Date();
     if (diff <= 0) {
-      document.getElementById('countdown').innerHTML = '<div style="color:var(--gold);font-family:Cormorant Garamond,serif;font-size:28px;font-weight:600">Event is live now!</div>';
+      cdWrap.innerHTML = '<div style="color:var(--gold);font-family:\'Cormorant Garamond\',serif;font-size:28px;font-weight:600">Event is live now!</div>';
+      clearInterval(countdownInterval);
       return;
     }
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cdDays').textContent  = String(d).padStart(2,'0');
-    document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
-    document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
+    cdDays.textContent  = String(d).padStart(2, '0');
+    cdHours.textContent = String(h).padStart(2, '0');
+    cdMins.textContent  = String(m).padStart(2, '0');
+    cdSecs.textContent  = String(s).padStart(2, '0');
   }
+
   update();
-  setInterval(update, 1000);
+  countdownInterval = setInterval(update, 1000);
 }
 
 // ─── EVENTS GRID ─────────────────────────────────────────────────────────────
@@ -1026,27 +1039,6 @@ function switchDay(idx, btn) {
     // User sees a fully loaded page regardless
   }
 })();
-
-// ─── COUNTDOWN ───────────────────────────────────────────────────────────────
-function startCountdown(targetDate) {
-  function update() {
-    const diff = targetDate - new Date();
-    if (diff <= 0) {
-      document.getElementById('countdown').innerHTML = '<div style="color:var(--gold);font-family:Cormorant Garamond,serif;font-size:28px;font-weight:600">Event is live now!</div>';
-      return;
-    }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cdDays').textContent  = String(d).padStart(2,'0');
-    document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
-    document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
-  }
-  update();
-  setInterval(update, 1000);
-}
 
 // ─── FAQ ─────────────────────────────────────────────────────────────────────
 function toggleFaq(btn) {
