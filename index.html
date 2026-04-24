@@ -1048,11 +1048,6 @@ function startCountdown(targetDate) {
   setInterval(update, 1000);
 }
 
- class="event-cta">Secure My Seat →</span>
-      </a>`;
-  }).join('');
-}
-
 // ─── FAQ ─────────────────────────────────────────────────────────────────────
 function toggleFaq(btn) {
   btn.classList.toggle('open');
@@ -1064,17 +1059,6 @@ function switchDay(idx, btn) {
   document.querySelectorAll('.day-tab').forEach((t,i) => t.classList.toggle('active', i === idx));
   document.querySelectorAll('.day-content').forEach((c,i) => c.classList.toggle('active', i === idx));
 }
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-(async function() {
-  try {
-    const res = await fetch('https://ipapi.co/json/');
-    const data = await res.json();
-    initPage(findNearestEvent(data.country_code || 'ES'));
-  } catch(e) {
-    initPage(EVENTS.find(ev => ev.city === 'Malaga') || EVENTS[0]);
-  }
-})();
 </script>
 </body>
 </html>
