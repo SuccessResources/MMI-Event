@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your City — Millionaire Mind Intensive 2026</title>
+<meta name="description" content="Pick the Millionaire Mind Intensive event closest to you. Events across Europe and Asia in 2026 — online and in-person VIP.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1628;--navy-mid:#132240;--navy-light:#1e3358;
+    --gold:#c9a84c;--gold-light:#e8c96a;--gold-pale:#f5e9c8;
+    --cream:#f8f4ee;--white:#ffffff;
+    --text-dim:rgba(255,255,255,0.65);--text-muted:rgba(255,255,255,0.4);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+
+  /* ── NAV (identical to main site) ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,22,40,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);letter-spacing:1px;text-decoration:none}
+  .nav-logo span{color:var(--white);font-weight:300}
+  .nav-cta{background:var(--gold);color:var(--navy);padding:10px 24px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+  .nav-cta:hover{background:var(--gold-light)}
+
+  /* ── HERO AREA ── */
+  .hero{padding:140px 40px 80px;position:relative;overflow:hidden;text-align:center}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 20% 80%,rgba(30,51,88,0.6) 0%,transparent 50%),linear-gradient(135deg,#0a1628 0%,#132240 50%,#0a1628 100%)}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px}
+  .hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+
+  /* hero-tag — identical component */
+  .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);padding:6px 16px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+  .hero-tag::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,72px);font-weight:300;line-height:1.0;margin-bottom:20px;letter-spacing:-1px}
+  .hero-title strong{font-weight:700;color:var(--gold-light)}
+  .hero-title em{font-style:italic;font-weight:300}
+  .hero-sub{font-size:17px;color:var(--text-dim);line-height:1.7;max-width:520px;margin:0 auto}
+
+  /* ── EVENTS SECTION (native MMI section style) ── */
+  .events{background:var(--navy);padding:72px 40px 96px}
+  .events-inner{max-width:1200px;margin:0 auto}
+
+  .section-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.1;margin-bottom:12px}
+  .section-title strong{font-weight:700}
+  .section-sub{color:var(--text-dim);font-size:15px;max-width:580px;line-height:1.7;margin-bottom:48px}
+
+  /* ── EVENT GRID (identical to main site) ── */
+  .events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+  .event-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:28px;cursor:pointer;transition:all .3s;text-decoration:none;display:block;position:relative;overflow:hidden}
+  .event-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity .3s}
+  .event-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
+  .event-card:hover::before{opacity:1}
+
+  /* online card — full-width row */
+  .event-card.online-card{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:24px;background:rgba(201,168,76,0.03);border-color:rgba(201,168,76,0.12)}
+  .event-card.online-card::before{opacity:.4}
+  .event-card.online-card:hover{border-color:rgba(201,168,76,0.35)}
+  .online-left{display:flex;align-items:center;gap:20px}
+  .online-icon{width:52px;height:52px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+  .online-info{}
+  .online-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:4px}
+  .online-desc{font-size:13px;color:var(--text-dim);max-width:480px;line-height:1.5}
+
+  /* event-badge (identical) */
+  .event-badge{display:inline-block;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+  .badge-featured{background:var(--gold);color:var(--navy)}
+  .badge-upcoming{background:rgba(255,255,255,0.08);color:var(--text-dim)}
+  .badge-online{background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.25)}
+
+  /* event card internals (identical) */
+  .event-city{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--white);margin-bottom:4px}
+  .event-country{font-size:13px;color:var(--text-dim);margin-bottom:16px}
+  .event-date{font-size:15px;font-weight:600;color:var(--gold);margin-bottom:4px}
+  .event-time{font-size:13px;color:var(--text-muted);margin-bottom:20px}
+  .event-price{display:flex;align-items:baseline;gap:8px;margin-bottom:20px}
+  .event-price-old{font-size:14px;text-decoration:line-through;color:var(--text-muted)}
+  .event-price-now{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--gold-light)}
+
+  /* event-cta button (identical) */
+  .event-cta{display:block;width:100%;text-align:center;padding:12px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:background .2s;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+  .event-cta:hover{background:var(--gold-light)}
+  .online-cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);padding:14px 28px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;white-space:nowrap;flex-shrink:0;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+  .online-cta:hover{background:var(--gold-light)}
+
+  /* ── GUARANTEE STRIP ── */
+  .guarantee-strip{background:rgba(201,168,76,0.06);border-top:1px solid rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.15);padding:20px 40px;text-align:center}
+  .guarantee{font-size:13px;color:var(--text-muted);display:inline-flex;align-items:center;gap:6px;justify-content:center}
+  .guarantee::before{content:'🛡';font-size:14px}
+
+  /* ── REDIRECT LOADER (identical to main site) ── */
+  .geo-loading{position:fixed;inset:0;background:var(--navy);z-index:999;display:flex;align-items:center;justify-content:center;transition:opacity .4s;opacity:0;pointer-events:none}
+  .geo-loading.show{opacity:1;pointer-events:all}
+  .loader-inner{text-align:center}
+  .loader-ring{width:48px;height:48px;border:2px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loader-city{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--white);margin-bottom:6px}
+  .loader-text{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+
+  /* ── FOOTER (identical to main site) ── */
+  footer{background:var(--navy);padding:32px 40px;border-top:1px solid rgba(255,255,255,0.06);text-align:center}
+  footer p{font-size:12px;color:var(--text-muted);line-height:1.8}
+  footer a{color:var(--text-dim);text-decoration:none}
+  footer a:hover{color:var(--gold)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    nav{padding:16px 20px}
+    .hero{padding:110px 20px 60px}
+    .events{padding:56px 20px 72px}
+    .events-grid{grid-template-columns:1fr 1fr}
+    .event-card.online-card{flex-direction:column;align-items:flex-start;gap:16px}
+    .online-cta{width:100%;justify-content:center}
+  }
+  @media(max-width:600px){
+    .events-grid{grid-template-columns:1fr}
+    footer{padding:24px 20px}
+    .guarantee-strip{padding:16px 20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- REDIRECT LOADER -->
+<div class="geo-loading" id="geoLoader">
+  <div class="loader-inner">
+    <div class="loader-ring"></div>
+    <div class="loader-city" id="loaderCity"></div>
+    <p class="loader-text">Taking you to your event</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Millionaire<span> Mind</span></a>
+  <a href="/" class="nav-cta">Back to Events</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">2026 World Tour</div>
+    <h1 class="hero-title">
+      Where Are You<br><em>Joining</em> <strong>Us?</strong>
+    </h1>
+    <p class="hero-sub">Choose the city closest to you. We'll make sure you get everything you need — dates, details, and your early bird seat.</p>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<section class="events">
+  <div class="events-inner">
+    <span class="section-tag">Choose Your City</span>
+    <h2 class="section-title">Pick Your <strong>Event</strong></h2>
+    <p class="section-sub">All events run online + in-person VIP. Online seats available worldwide. In-person VIP limited to venue capacity.</p>
+
+    <div class="events-grid">
+
+      <a class="event-card" href="#" data-city="Kuala Lumpur" data-cart="/kl-cart" onclick="handleSelect(event,this)">
+        <span class="event-badge badge-upcoming">Upcoming</span>
+        <div class="event-city">🇲🇾 Kuala Lumpur</div>
+        <div class="event-country">Malaysia</div>
+        <div class="event-date">1–3 May 2026</div>
+        <div class="event-time">9am–8pm GMT+8</div>
+        <div class="event-price">
+          <span class="event-price-old">$199</span>
+          <span class="event-price-now">$19</span>
+        </div>
+        <span class="event-cta">Select This City →</span>
+      </a>
+
+      <a class="event-card" href="#" data-city="Malaga" data-cart="/mal-cart" onclick="handleSelect(event,this)">
+        <span class="event-badge badge-upcoming">Upcoming</span>
+        <div class="event-city">🇪🇸 Malaga</div>
+        <div class="event-country">Spain</div>
+        <div class="event-date">22–24 May 2026</div>
+        <div class="event-time">9am–8pm GMT+2</div>
+        <div class="event-price">
+          <span class="event-price-old">$199</span>
+          <span class="event-price-now">$19</span>
+        </div>
+        <span class="event-cta">Select This City →</span>
+      </a>
+
+      <a class="event-card" href="#" data-city="Warsaw" data-cart="/war-cart" onclick="handleSelect(event,this)">
+        <span class="event-badge badge-upcoming">Upcoming</span>
+        <div class="event-city">🇵🇱 Warsaw</div>
+        <div class="event-country">Poland</div>
+        <div class="event-date">12–14 June 2026</div>
+        <div class="event-time">9am–8pm GMT+2</div>
+        <div class="event-price">
+          <span class="event-price-old">$199</span>
+          <span class="event-price-now">$19</span>
+        </div>
+        <span class="event-cta">Select This City →</span>
+      </a>
+
+      <a class="event-card" href="#" data-city="London" data-cart="/lon-cart" onclick="handleSelect(event,this)">
+        <span class="event-badge badge-upcoming">Upcoming</span>
+        <div class="event-city">🇬🇧 London</div>
+        <div class="event-country">United Kingdom</div>
+        <div class="event-date">3–5 July 2026</div>
+        <div class="event-time">9am–8pm GMT+1</div>
+        <div class="event-price">
+          <span class="event-price-old">$199</span>
+          <span class="event-price-now">$19</span>
+        </div>
+        <span class="event-cta">Select This City →</span>
+      </a>
+
+      <a class="event-card" href="#" data-city="Cologne" data-cart="/col-cart" onclick="handleSelect(event,this)">
+        <span class="event-badge badge-upcoming">Upcoming</span>
+        <div class="event-city">🇩🇪 Cologne</div>
+        <div class="event-country">Germany</div>
+        <div class="event-date">10–12 July 2026</div>
+        <div class="event-time">9am–8pm GMT+2</div>
+        <div class="event-price">
+          <span class="event-price-old">$199</span>
+          <span class="event-price-now">$19</span>
+        </div>
+        <span class="event-cta">Select This City →</span>
+      </a>
+
+      <a class="event-card" href="#" data-city="Rotterdam" data-cart="/rot-cart" onclick="handleSelect(event,this)">
+        <span class="event-badge badge-upcoming">Upcoming</span>
+        <div class="event-city">🇳🇱 Rotterdam</div>
+        <div class="event-country">Netherlands</div>
+        <div class="event-date">15–17 Oct 2026</div>
+        <div class="event-time">9am–8pm GMT+2</div>
+        <div class="event-price">
+          <span class="event-price-old">$199</span>
+          <span class="event-price-now">$19</span>
+        </div>
+        <span class="event-cta">Select This City →</span>
+      </a>
+
+      <!-- ONLINE — full width -->
+      <a class="event-card online-card" href="#" data-city="Online" data-cart="/online-cart" onclick="handleSelect(event,this)">
+        <div class="online-left">
+          <div class="online-icon">🌍</div>
+          <div class="online-info">
+            <span class="event-badge badge-online" style="margin-bottom:8px">Available Worldwide</span>
+            <div class="online-title">Attend Online — From Anywhere</div>
+            <div class="online-desc">Every event is available live online. Same 3-day experience, same trainer, same breakthroughs — from your home or office.</div>
+          </div>
+        </div>
+        <button class="online-cta">Join Online →</button>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<div class="guarantee-strip">
+  <p class="guarantee">100% Risk-Free · If Day 1 doesn't blow your mind, we refund every cent · 30-Day Money-Back Guarantee</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Success Resources · All Rights Reserved</p>
+  <p style="margin-top:8px">
+    <a href="/privacy">Privacy Policy</a> ·
+    <a href="/terms">Terms & Conditions</a> ·
+    <a href="/cookies">Cookies Policy</a> ·
+    <a href="https://www.millionairemindworld.com/sr">Contact Us</a>
+  </p>
+  <p style="margin-top:16px;font-size:11px;max-width:700px;margin-left:auto;margin-right:auto">The information presented at the event is intended for educational and informational purposes only. Results shown are not typical. Individual results will vary. This product includes a 30-day refund guarantee.</p>
+</footer>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────────
+  // Replace with your actual Zapier Catch Hook URL
+  const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/YOUR_HOOK_ID/YOUR_HOOK_KEY/';
+
+  // Read email injected by ActiveCampaign: ?email=%CONTACT_EMAIL%
+  const params     = new URLSearchParams(window.location.search);
+  const emailParam = params.get('email') || '';
+
+  // City metadata for AC field population
+  const CITY_META = {
+    'Kuala Lumpur': { date:'1–3 May 2026',      cartUrl:'/kl-cart',     tag:'city-kl'        },
+    'Malaga':       { date:'22–24 May 2026',     cartUrl:'/mal-cart',    tag:'city-malaga'     },
+    'Warsaw':       { date:'12–14 June 2026',    cartUrl:'/war-cart',    tag:'city-warsaw'     },
+    'London':       { date:'3–5 July 2026',      cartUrl:'/lon-cart',    tag:'city-london'     },
+    'Cologne':      { date:'10–12 July 2026',    cartUrl:'/col-cart',    tag:'city-cologne'    },
+    'Rotterdam':    { date:'15–17 Oct 2026',     cartUrl:'/rot-cart',    tag:'city-rotterdam'  },
+    'Online':       { date:'Any 2026 event',     cartUrl:'/online-cart', tag:'city-online'     }
+  };
+
+  // ── ZAPIER WEBHOOK ──────────────────────────────────────────────────────────
+  async function fireWebhook(city) {
+    const meta = CITY_META[city] || {};
+    try {
+      await fetch(ZAPIER_WEBHOOK, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email:          emailParam,
+          nearest_event:  city,
+          event_city:     city,
+          event_date:     meta.date    || '',
+          event_cart_url: meta.cartUrl || '',
+          city_tag:       meta.tag     || 'city-unknown',
+          geo_source:     'email-click',
+          clicked_at:     new Date().toISOString(),
+          page_url:       window.location.href
+        })
+      });
+    } catch(err) {
+      // Silent fail — redirect still happens
+      console.warn('Webhook error:', err);
+    }
+  }
+
+  // ── CLICK HANDLER ───────────────────────────────────────────────────────────
+  async function handleSelect(e, card) {
+    e.preventDefault();
+    const city    = card.dataset.city;
+    const cartUrl = card.dataset.cart;
+    const meta    = CITY_META[city] || {};
+
+    // Show loader
+    document.getElementById('loaderCity').textContent =
+      city === 'Online' ? 'Online — All Cities' : city;
+    document.getElementById('geoLoader').classList.add('show');
+
+    // Fire Zapier (await but don't block on error)
+    await fireWebhook(city);
+
+    // Redirect — pass email forward to cart page
+    const dest = emailParam
+      ? `${meta.cartUrl || cartUrl}?email=${encodeURIComponent(emailParam)}`
+      : (meta.cartUrl || cartUrl);
+
+    window.location.href = dest;
+  }
+
+  // ── AUTO-SELECT from ?city= param (deep-link from email button) ─────────────
+  // If email has direct city buttons like ?city=malaga&email=...
+  // the page silently skips the choice screen and redirects straight through
+  const cityParam = params.get('city');
+  if (cityParam) {
+    document.querySelectorAll('.event-card').forEach(card => {
+      const slug = card.dataset.city.toLowerCase().replace(/\s+/g, '-');
+      if (slug === cityParam.toLowerCase()) {
+        setTimeout(() => handleSelect({ preventDefault:()=>{} }, card), 300);
+      }
+    });
+  }
+</script>
+</body>
+</html>
