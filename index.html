@@ -792,18 +792,24 @@ const TRAINERS = {
 
 // ─── EVENT DATA ───────────────────────────────────────────────────────────────
 const EVENTS = [
-  {city:"Malaga",       country:"Spain",          flag:"🇪🇸", dates:"22–24 May 2026",     time:"9am–8pm GMT+2", eventDate:new Date("2026-05-22T09:00:00+02:00"), stripeButtonId:"buy_btn_MALAGA_ID",     trainer:"arnon", geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
-  {city:"Kuala Lumpur", country:"Malaysia",        flag:"🇲🇾", dates:"1–3 May 2026",       time:"9am–8pm GMT+8", eventDate:new Date("2026-05-01T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPf03IMbI04nnt8ezfDNzTf",         trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
-  {city:"Warsaw",       country:"Poland",          flag:"🇵🇱", dates:"12–14 June 2026",    time:"9am–8pm GMT+2", eventDate:new Date("2026-06-12T09:00:00+02:00"), stripeButtonId:"buy_btn_WARSAW_ID",     trainer:"arnon", geo:["PL","CZ","SK","HU","UA","BY","LT","LV","EE","MD"],featured:false},
-  {city:"London",       country:"United Kingdom",  flag:"🇬🇧", dates:"3–5 July 2026",      time:"9am–8pm GMT+1", eventDate:new Date("2026-07-03T09:00:00+01:00"), stripeButtonId:"buy_btn_LONDON_ID",     trainer:"arnon", geo:["GB","IE"],featured:false},
-  {city:"Cologne",      country:"Germany",         flag:"🇩🇪", dates:"10–12 July 2026",    time:"9am–8pm GMT+2", eventDate:new Date("2026-07-10T09:00:00+02:00"), stripeButtonId:"buy_btn_COLOGNE_ID",    trainer:"arnon", geo:["DE","AT","CH","LI","LU"],featured:false},
-  {city:"Johor Bahru",  country:"Malaysia",        flag:"🇲🇾", dates:"31 Jul–2 Aug 2026",  time:"9am–8pm GMT+8", eventDate:new Date("2026-07-31T09:00:00+08:00"), stripeButtonId:"buy_btn_JB_ID",         trainer:"arnon", geo:[],featured:false},
-  {city:"Geneva",       country:"Switzerland",     flag:"🇨🇭", dates:"11–13 Sep 2026",     time:"9am–8pm GMT+2", eventDate:new Date("2026-09-11T09:00:00+02:00"), stripeButtonId:"buy_btn_GENEVA_ID",     trainer:"arnon", geo:[],featured:false},
-  {city:"Madrid",       country:"Spain",           flag:"🇪🇸", dates:"25–27 Sep 2026",     time:"9am–8pm GMT+2", eventDate:new Date("2026-09-25T09:00:00+02:00"), stripeButtonId:"buy_btn_MADRID_ID",     trainer:"arnon", geo:[],featured:false},
-  {city:"Rotterdam",    country:"Netherlands",     flag:"🇳🇱", dates:"15–17 Oct 2026",     time:"9am–8pm GMT+2", eventDate:new Date("2026-10-15T09:00:00+02:00"), stripeButtonId:"buy_btn_ROTTERDAM_ID",  trainer:"arnon", geo:["NL","BE","DK","SE","NO","FI","IS"],featured:false},
-  {city:"Kuala Lumpur", country:"Malaysia",        flag:"🇲🇾", dates:"30 Oct–1 Nov 2026",  time:"9am–8pm GMT+8", eventDate:new Date("2026-10-30T09:00:00+08:00"), stripeButtonId:"buy_btn_KL2_ID",        trainer:"arnon", geo:[],featured:false},
-  {city:"Birmingham",   country:"United Kingdom",  flag:"🇬🇧", dates:"6–8 Nov 2026",       time:"9am–8pm GMT+0", eventDate:new Date("2026-11-06T09:00:00+00:00"), stripeButtonId:"buy_btn_BIRMINGHAM_ID", trainer:"arnon", geo:[],featured:false},
-  {city:"Brussels",     country:"Belgium",         flag:"🇧🇪", dates:"20–22 Nov 2026",     time:"9am–8pm GMT+1", eventDate:new Date("2026-11-20T09:00:00+01:00"), stripeButtonId:"buy_btn_BRUSSELS_ID",   trainer:"arnon", geo:["BE","FR","MC","LU","BG","RO","BH","KW","QA","OM","SA","AE","JO","IL","EG","LB","IQ","IR","SY","TR","AZ","GE","AM","KZ","UZ","TM","TJ","KG"],featured:false}
+  // tzOffset = GMT offset in hours (used for timezone-based routing for virtual attendees)
+  {city:"Kuala Lumpur", country:"Malaysia",       flag:"🇲🇾", dates:"1–3 May 2026",      time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-05-01T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPf03IMbI04nnt8ezfDNzTf", trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
+  {city:"Malaga",        country:"Spain",          flag:"🇪🇸", dates:"22–24 May 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-05-22T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPfwLGY6RiRFzHXmZsZbpnQ", trainer:"arnon", geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
+  {city:"Warsaw",        country:"Poland",         flag:"🇵🇱", dates:"12–14 June 2026",   time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-06-12T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPfzBGY6RiRFzHXHPK0Dekh", trainer:"arnon", geo:["PL","CZ","SK","HU","UA","BY","LT","LV","EE","MD"],featured:false},
+  {city:"London",        country:"United Kingdom", flag:"🇬🇧", dates:"3–5 July 2026",     time:"9am–8pm GMT+1", tzOffset:1,  eventDate:new Date("2026-07-03T09:00:00+01:00"), stripeButtonId:"buy_btn_1TPg1wGY6RiRFzHXgR3Q6DjY", trainer:"arnon", geo:["GB","IE"],featured:false},
+  {city:"Cologne",       country:"Germany",        flag:"🇩🇪", dates:"10–12 July 2026",   time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-07-10T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg3zGY6RiRFzHX0gvy1rME", trainer:"arnon", geo:["DE","AT","CH","LI","LU"],featured:false},
+  // Johor Bahru — second MY event, inherits SE Asia geo so it takes over after KL May passes
+  {city:"Johor Bahru",   country:"Malaysia",       flag:"🇲🇾", dates:"31 Jul–2 Aug 2026", time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-07-31T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPfYcIMbI04nnt8A0I6vlBn", trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
+  // Geneva — French/Swiss region, takes over from Cologne after July
+  {city:"Geneva",        country:"Switzerland",    flag:"🇨🇭", dates:"11–13 Sep 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-09-11T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg5fGY6RiRFzHXOMfYTUrj", trainer:"arnon", geo:["CH","LI","FR","MC"],featured:false},
+  // Madrid — second Spain event, inherits same geo as Malaga after May
+  {city:"Madrid",        country:"Spain",          flag:"🇪🇸", dates:"25–27 Sep 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-09-25T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg6YGY6RiRFzHXu0QHzUyg", trainer:"arnon", geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
+  {city:"Rotterdam",     country:"Netherlands",    flag:"🇳🇱", dates:"15–17 Oct 2026",    time:"9am–8pm GMT+2", tzOffset:2,  eventDate:new Date("2026-10-15T09:00:00+02:00"), stripeButtonId:"buy_btn_1TPg7TGY6RiRFzHX0u7ZIUEv", trainer:"arnon", geo:["NL","BE","DK","SE","NO","FI","IS"],featured:false},
+  // KL Oct — third MY event, same SE Asia geo as KL May and JB
+  {city:"Kuala Lumpur",  country:"Malaysia",       flag:"🇲🇾", dates:"30 Oct–1 Nov 2026", time:"9am–8pm GMT+8", tzOffset:8,  eventDate:new Date("2026-10-30T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPfbSIMbI04nnt8RtV6MNBj", trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
+  // Birmingham — second UK event, same geo as London
+  {city:"Birmingham",    country:"United Kingdom", flag:"🇬🇧", dates:"6–8 Nov 2026",      time:"9am–8pm GMT+0", tzOffset:0,  eventDate:new Date("2026-11-06T09:00:00+00:00"), stripeButtonId:"buy_btn_1TPg8uGY6RiRFzHXTrN2kpQe", trainer:"arnon", geo:["GB","IE"],featured:false},
+  {city:"Brussels",      country:"Belgium",        flag:"🇧🇪", dates:"20–22 Nov 2026",    time:"9am–8pm GMT+1", tzOffset:1,  eventDate:new Date("2026-11-20T09:00:00+01:00"), stripeButtonId:"buy_btn_1TPg9lGY6RiRFzHX2buGBRix", trainer:"arnon", geo:["BE","FR","MC","LU","BG","RO","BH","KW","QA","OM","SA","AE","JO","IL","EG","LB","IQ","IR","SY","TR","AZ","GE","AM","KZ","UZ","TM","TJ","KG"],featured:false}
 ];
 
 // ─── STRIPE CONFIG ────────────────────────────────────────────────────────────
@@ -840,13 +846,31 @@ function updateTrainer(ev) {
     .join('');
 }
 
-// ─── GEO ─────────────────────────────────────────────────────────────────────
-function findNearestEvent(countryCode) {
+// ─── GEO + TIMEZONE ROUTING ──────────────────────────────────────────────────
+// Priority: 1) Country match (in-person proximity)
+//           2) Timezone match (virtual convenience)
+//           3) Next upcoming (last resort)
+function findNearestEvent(countryCode, visitorTzOffset) {
   const now = new Date();
-  const matched = EVENTS.find(e => e.geo.includes(countryCode) && e.eventDate > now);
-  if (matched) return matched;
   const upcoming = EVENTS.filter(e => e.eventDate > now).sort((a,b) => a.eventDate - b.eventDate);
-  return upcoming[0] || EVENTS[0];
+  if (!upcoming.length) return EVENTS[0];
+
+  // Step 1 — country match (best for in-person attendees)
+  const byCountry = upcoming.find(e => e.geo.includes(countryCode));
+  if (byCountry) return byCountry;
+
+  // Step 2 — timezone match (best for virtual attendees)
+  if (visitorTzOffset !== undefined && visitorTzOffset !== null) {
+    const byTz = upcoming.reduce((best, ev) => {
+      const diffEv   = Math.abs(ev.tzOffset - visitorTzOffset);
+      const diffBest = Math.abs(best.tzOffset - visitorTzOffset);
+      return diffEv < diffBest ? ev : best;
+    });
+    return byTz;
+  }
+
+  // Step 3 — next upcoming chronologically
+  return upcoming[0];
 }
 
 // source: 'geo' | 'picker'
@@ -1021,12 +1045,15 @@ function switchDay(idx, btn) {
   // Step 2 — race geo detection against a 3-second timeout
   try {
     const controller = new AbortController();
-    const timeout    = setTimeout(() => controller.abort(), 3000); // 3s max
+    const timeout    = setTimeout(() => controller.abort(), 3000);
 
     const res  = await fetch('https://ipapi.co/json/', { signal: controller.signal });
     clearTimeout(timeout);
     const data = await res.json();
-    const geoEvent = findNearestEvent(data.country_code || 'ES');
+    const geoEvent = findNearestEvent(
+      data.country_code || 'ES',
+      data.utc_offset ? parseInt(data.utc_offset) / 100 : null
+    );
 
     // Step 3 — only update the hero if geo found a DIFFERENT city
     // (no flash if geo agrees with the fallback)
