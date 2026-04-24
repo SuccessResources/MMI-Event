@@ -793,7 +793,7 @@ const TRAINERS = {
 // ─── EVENT DATA ───────────────────────────────────────────────────────────────
 const EVENTS = [
   {city:"Malaga",       country:"Spain",          flag:"🇪🇸", dates:"22–24 May 2026",     time:"9am–8pm GMT+2", eventDate:new Date("2026-05-22T09:00:00+02:00"), stripeButtonId:"buy_btn_MALAGA_ID",     trainer:"arnon", geo:["ES","PT","MA","DZ","TN","LY","IT","MT","GR","CY","AL","BA","ME","MK","RS","SI","HR","AD","SM","VA"],featured:false},
-  {city:"Kuala Lumpur", country:"Malaysia",        flag:"🇲🇾", dates:"1–3 May 2026",       time:"9am–8pm GMT+8", eventDate:new Date("2026-05-01T09:00:00+08:00"), stripeButtonId:"buy_btn_KL_ID",         trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
+  {city:"Kuala Lumpur", country:"Malaysia",        flag:"🇲🇾", dates:"1–3 May 2026",       time:"9am–8pm GMT+8", eventDate:new Date("2026-05-01T09:00:00+08:00"), stripeButtonId:"buy_btn_1TPf03IMbI04nnt8ezfDNzTf",         trainer:"arnon", geo:["MY","SG","BN","ID","PH","TH","VN","MM","KH","LA","TL","CN","HK","MO","TW","JP","KR","MN","AU","NZ","FJ","PG","IN","LK","BD","PK","NP","BT","MV","AF"],featured:false},
   {city:"Warsaw",       country:"Poland",          flag:"🇵🇱", dates:"12–14 June 2026",    time:"9am–8pm GMT+2", eventDate:new Date("2026-06-12T09:00:00+02:00"), stripeButtonId:"buy_btn_WARSAW_ID",     trainer:"arnon", geo:["PL","CZ","SK","HU","UA","BY","LT","LV","EE","MD"],featured:false},
   {city:"London",       country:"United Kingdom",  flag:"🇬🇧", dates:"3–5 July 2026",      time:"9am–8pm GMT+1", eventDate:new Date("2026-07-03T09:00:00+01:00"), stripeButtonId:"buy_btn_LONDON_ID",     trainer:"arnon", geo:["GB","IE"],featured:false},
   {city:"Cologne",      country:"Germany",         flag:"🇩🇪", dates:"10–12 July 2026",    time:"9am–8pm GMT+2", eventDate:new Date("2026-07-10T09:00:00+02:00"), stripeButtonId:"buy_btn_COLOGNE_ID",    trainer:"arnon", geo:["DE","AT","CH","LI","LU"],featured:false},
@@ -808,7 +808,7 @@ const EVENTS = [
 
 // ─── STRIPE CONFIG ────────────────────────────────────────────────────────────
 // Replace with your Stripe publishable key (pk_live_... or pk_test_...)
-const STRIPE_PUBLISHABLE_KEY = 'pk_live_YOUR_PUBLISHABLE_KEY';
+const STRIPE_PUBLISHABLE_KEY = 'pk_live_51H7bbGIMbI04nnt8o8Wws5ZRWJTOEybppaWlmOHjM8kIRHZCrFV0F7u5UAGgL5KKN4TQcnkoeOkz66dYwL8kdqSZ00B0fTMNIp';
 
 // ─── CITY SLUG MAP ────────────────────────────────────────────────────────────
 const CITY_SLUGS = {
@@ -950,7 +950,7 @@ function openCheckout(ev) {
   const container = document.getElementById('stripeButtonContainer');
   container.innerHTML = ''; // clear any previous button
 
-  if (ev.stripeButtonId && STRIPE_PUBLISHABLE_KEY !== 'pk_live_YOUR_PUBLISHABLE_KEY') {
+  if (ev.stripeButtonId && ev.stripeButtonId.startsWith('buy_btn_') && !ev.stripeButtonId.includes('_ID')) {
     // Real Stripe Buy Button
     const btn = document.createElement('stripe-buy-button');
     btn.setAttribute('buy-button-id', ev.stripeButtonId);
