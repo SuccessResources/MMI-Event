@@ -2196,11 +2196,11 @@ async function detectGeo(){
     try{
       var ctrl = new AbortController();
       var tid  = setTimeout(function(){ ctrl.abort(); }, 2500);
-      var res  = await fetch('https://ipapi.co/json/', { signal: ctrl.signal });
+      var res  = await fetch('https://ip-api.com/json/?fields=country_code,country_name,city', { signal: ctrl.signal });
       clearTimeout(tid);
       if(res.ok){
         var geo = await res.json();
-        countryCode = geo.country_code || '';
+        countryCode = geo.countryCode || geo.country_code || '';
         window._geo = geo;  // store for AC tracking
       }
     }catch(geoErr){}
@@ -2213,10 +2213,12 @@ async function detectGeo(){
                || up[0] || EVENTS[0];
     initPage(ev);
 
-    // Track geo back to AC if visitor came from email
+    // Track geo back to AC if visitor came from email link
     var emailParam = new URLSearchParams(window.location.search).get('e');
-    if(emailParam && window._geo){
-      trackGeoToAC(emailParam, window._geo.city || '', window._geo.country_name || '');
+    if(emailParam){
+      var geoCity    = (window._geo && window._geo.city)    || ev.city    || '';
+      var geoCountry = (window._geo && (window._geo.country_name || window._geo.country)) || ev.country || '';
+      trackGeoToAC(emailParam, geoCity, geoCountry);
     }
 
   }catch(e){
