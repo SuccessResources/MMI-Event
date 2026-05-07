@@ -1959,9 +1959,11 @@ function buildTourSection(featuredEv){
   var upcoming=EVENTS.filter(function(e){return e.eventDate>now;}).sort(function(a,b){return a.eventDate-b.eventDate;});
   var others=upcoming.filter(function(e){return e!==featuredEv;});
   var slug=featuredEv.citySlug||'london';
+  // Normalise slug for image lookup — strip trailing month suffix (e.g. kuala-lumpur-oct → kuala-lumpur)
+  var imgSlug=slug.replace(/-(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)$/,'');
   // Set city background image
   var cityBg = document.getElementById('cityImgBg');
-  if(cityBg) cityBg.style.backgroundImage = "url('/assets/cities/"+slug+".webp')";
+  if(cityBg) cityBg.style.backgroundImage = "url('/assets/cities/"+imgSlug+".webp')";
   var featHTML=
     '<div class="tour-featured-card">'+
     '<div class="tour-feat-left">'+
@@ -1976,7 +1978,7 @@ function buildTourSection(featuredEv){
     '<div class="tour-feat-scarcity"><svg class="icon icon-sm" style="color:var(--gold)"><use href="#i-users-small"/></svg>&nbsp;Limited seats. This stop is filling.</div>'+
     '</div>'+
     '<div class="tour-feat-right">'+
-    '<img src="/assets/cities/'+slug+'.webp" alt="'+featuredEv.city+'" loading="lazy" onerror="this.style.display=\'none\'">'+
+    '<img src="/assets/cities/'+imgSlug+'.webp" alt="'+featuredEv.city+'" loading="lazy" onerror="this.style.display=\'none\'">'+
     '</div>'+
     '</div>';
   var featEl=document.getElementById('tourFeatured');
