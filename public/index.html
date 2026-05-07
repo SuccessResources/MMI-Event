@@ -2161,13 +2161,36 @@ async function detectGeo(){
   function hide(){ var l=document.getElementById('geoLoader'); if(l){l.classList.add('hide');setTimeout(function(){l.style.display='none';},500);} }
 
   try{
+    // 1. Path or ?city= param — instant, no network
     var pathSlug  = window.location.pathname.replace(/^\/+|\/+$/g,'');
     var cityParam = new URLSearchParams(window.location.search).get('city');
     var slugCheck = pathSlug || cityParam;
-    var ev = null;
-    if(slugCheck) ev = EVENTS.find(function(e){ return e.citySlug === slugCheck; });
-    if(!ev) ev = EVENTS.filter(function(e){ return e.eventDate > new Date(); }).sort(function(a,b){ return a.eventDate-b.eventDate; })[0] || EVENTS[0];
+    if(slugCheck){
+      var bySlug = EVENTS.find(function(e){ return e.citySlug===slugCheck; });
+      if(bySlug){ initPage(bySlug); return; }
+    }
+
+    // 2. Geo detect — 2.5s timeout, then fallback
+    var countryCode = '';
+    try{
+      var ctrl = new AbortController();
+      var tid  = setTimeout(function(){ ctrl.abort(); }, 2500);
+      var res  = await fetch('https://ipapi.co/json/', { signal: ctrl.signal });
+      clearTimeout(tid);
+      if(res.ok){
+        var geo = await res.json();
+        countryCode = geo.country_code || '';
+      }
+    }catch(geoErr){}
+
+    // 3. Find nearest event by country, fallback to next upcoming
+    var now  = new Date();
+    var up   = EVENTS.filter(function(e){ return e.eventDate > now; })
+                     .sort(function(a,b){ return a.eventDate - b.eventDate; });
+    var ev   = (countryCode && up.find(function(e){ return e.geo && e.geo.includes(countryCode); }))
+               || up[0] || EVENTS[0];
     initPage(ev);
+
   }catch(e){
     console.error('Boot error:',e);
     try{ initPage(EVENTS[0]); }catch(e2){}
