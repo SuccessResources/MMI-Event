@@ -2157,6 +2157,27 @@ async function detectGeo(){
   return '';
 }
 
+
+  // ── AC GEO TRACKING ─────────────────────────────────────────────
+  // Fires when visitor arrives from email link (?e=email@example.com)
+  function trackGeoToAC(email, city, country) {
+    if (!email) return;
+    // Find or create contact by email, then update Geo fields
+    fetch('https://srglobal75904.api-us1.com/api/3/contact/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Api-Token': 'f6b8f9b55b88ea536fa20aa55e9ff87cbe6066a7a099e83714b333d21ba543eeef844a1c' },
+      body: JSON.stringify({
+        contact: {
+          email: email,
+          fieldValues: [
+            { field: '468', value: city    },
+            { field: '469', value: country }
+          ]
+        }
+      })
+    }).catch(function(){});  // silent fail — never affects page load
+  }
+
 (async()=>{
   function hide(){ var l=document.getElementById('geoLoader'); if(l){l.classList.add('hide');setTimeout(function(){l.style.display='none';},500);} }
 
@@ -2180,6 +2201,7 @@ async function detectGeo(){
       if(res.ok){
         var geo = await res.json();
         countryCode = geo.country_code || '';
+        window._geo = geo;  // store for AC tracking
       }
     }catch(geoErr){}
 
@@ -2190,6 +2212,12 @@ async function detectGeo(){
     var ev   = (countryCode && up.find(function(e){ return e.geo && e.geo.includes(countryCode); }))
                || up[0] || EVENTS[0];
     initPage(ev);
+
+    // Track geo back to AC if visitor came from email
+    var emailParam = new URLSearchParams(window.location.search).get('e');
+    if(emailParam && window._geo){
+      trackGeoToAC(emailParam, window._geo.city || '', window._geo.country_name || '');
+    }
 
   }catch(e){
     console.error('Boot error:',e);
