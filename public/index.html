@@ -2160,60 +2160,53 @@ async function detectGeo(){
 
   // ── AC GEO TRACKING ─────────────────────────────────────────────
   // Fires when visitor arrives from email link (?e=email@example.com)
-  function trackGeoToAC(email, geoData) {
+  function trackGeoToAC(email, city, country) {
     if (!email) return;
-    var city    = (geoData && geoData.city)         || '';
-    var country = (geoData && geoData.country_name) || '';
-    // Post to our own proxy endpoint — avoids CORS and hides API key
     fetch('/api/track-geo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, city: city, country: country })
+      body: JSON.stringify({ email: email, city: city||'', country: country||'' })
     }).catch(function(){});
   }
 
 (async()=>{
   function hide(){ var l=document.getElementById('geoLoader'); if(l){l.classList.add('hide');setTimeout(function(){l.style.display='none';},500);} }
 
-  try{
-    // 1. Path or ?city= param — instant, no network
-    var pathSlug  = window.location.pathname.replace(/^\/+|\/+$/g,'');
-    var cityParam = new URLSearchParams(window.location.search).get('city');
-    var slugCheck = pathSlug || cityParam;
-    if(slugCheck){
-      var bySlug = EVENTS.find(function(e){ return e.citySlug===slugCheck; });
-      if(bySlug){ initPage(bySlug); return; }
-    }
+  var emailParam = new URLSearchParams(window.location.search).get('e');
 
-    // 2. Geo detect — 2.5s timeout, then fallback
-    var countryCode = '';
+  try{
+    // 1. Geo detect — always run (needed for both city matching AND tracking)
+    var countryCode = '', geoCity = '', geoCountry = '';
     try{
       var ctrl = new AbortController();
       var tid  = setTimeout(function(){ ctrl.abort(); }, 2500);
-      var res  = await fetch('https://ip-api.com/json/?fields=country_code,country_name,city', { signal: ctrl.signal });
+      var geoRes = await fetch('https://ipapi.co/json/', { signal: ctrl.signal });
       clearTimeout(tid);
-      if(res.ok){
-        var geo = await res.json();
-        countryCode = geo.countryCode || geo.country_code || '';
-        window._geo = geo;  // store for AC tracking
+      if(geoRes.ok){
+        var geo = await geoRes.json();
+        countryCode = geo.country_code  || '';
+        geoCity     = geo.city          || '';
+        geoCountry  = geo.country_name  || '';
       }
     }catch(geoErr){}
 
-    // 3. Find nearest event by country, fallback to next upcoming
-    var now  = new Date();
-    var up   = EVENTS.filter(function(e){ return e.eventDate > now; })
-                     .sort(function(a,b){ return a.eventDate - b.eventDate; });
-    var ev   = (countryCode && up.find(function(e){ return e.geo && e.geo.includes(countryCode); }))
-               || up[0] || EVENTS[0];
+    // 2. Pick city — path/param first, then geo match, then next upcoming
+    var pathSlug  = window.location.pathname.replace(/^\/+|\/+$/g,'');
+    var cityParam = new URLSearchParams(window.location.search).get('city');
+    var slugCheck = pathSlug || cityParam;
+    var ev = null;
+    if(slugCheck) ev = EVENTS.find(function(e){ return e.citySlug===slugCheck; });
+    if(!ev){
+      var now = new Date();
+      var up  = EVENTS.filter(function(e){ return e.eventDate>now; })
+                      .sort(function(a,b){ return a.eventDate-b.eventDate; });
+      ev = (countryCode && up.find(function(e){ return e.geo&&e.geo.includes(countryCode); }))
+           || up[0] || EVENTS[0];
+    }
     initPage(ev);
 
-    // Track geo back to AC if visitor came from email link
-    var emailParam = new URLSearchParams(window.location.search).get('e');
-    if(emailParam){
-      var geoCity    = (window._geo && window._geo.city)    || ev.city    || '';
-      var geoCountry = (window._geo && (window._geo.country_name || window._geo.country)) || ev.country || '';
-      trackGeoToAC(emailParam, geoCity, geoCountry);
-    }
+    // 3. Track to AC if from email link — fires after page loads, silent
+    if(emailParam) trackGeoToAC(emailParam, geoCity, geoCountry);
 
   }catch(e){
     console.error('Boot error:',e);
