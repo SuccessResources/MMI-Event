@@ -2160,22 +2160,16 @@ async function detectGeo(){
 
   // ── AC GEO TRACKING ─────────────────────────────────────────────
   // Fires when visitor arrives from email link (?e=email@example.com)
-  function trackGeoToAC(email, city, country) {
+  function trackGeoToAC(email, geoData) {
     if (!email) return;
-    // Find or create contact by email, then update Geo fields
-    fetch('https://srglobal75904.api-us1.com/api/3/contact/sync', {
+    var city    = (geoData && geoData.city)         || '';
+    var country = (geoData && geoData.country_name) || '';
+    // Post to our own proxy endpoint — avoids CORS and hides API key
+    fetch('/api/track-geo', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Api-Token': 'f6b8f9b55b88ea536fa20aa55e9ff87cbe6066a7a099e83714b333d21ba543eeef844a1c' },
-      body: JSON.stringify({
-        contact: {
-          email: email,
-          fieldValues: [
-            { field: '468', value: city    },
-            { field: '469', value: country }
-          ]
-        }
-      })
-    }).catch(function(){});  // silent fail — never affects page load
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, city: city, country: country })
+    }).catch(function(){});
   }
 
 (async()=>{
