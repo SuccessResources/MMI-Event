@@ -923,6 +923,25 @@ footer a:hover{color:var(--gold-lt)}
   .vb-logo-forbes{font-size:11px !important}
   .vb-logo-divider{height:12px;flex-shrink:0}
 }
+
+/* ══ MOTHER'S DAY PROMO ══════════════════════════════════════ */
+.mday-hero{display:none;background:linear-gradient(135deg,#fff0f5 0%,#fde8f0 100%);border:1px solid rgba(214,63,110,0.2);border-radius:12px;padding:14px 20px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden}
+.mday-hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ctext y='40' font-size='28' opacity='.06'%3E🌸%3C/text%3E%3C/svg%3E");opacity:1;pointer-events:none}
+.mday-hero-tag{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#d63f6e;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:8px}
+.mday-hero-offer{font-family:'Playfair Display',serif;font-size:clamp(17px,4vw,22px);font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:5px}
+.mday-hero-offer span{color:#d63f6e}
+.mday-hero-deadline{font-family:'Montserrat',sans-serif;font-size:10px;color:#999;letter-spacing:1px}
+.mday-hero.show{display:block}
+
+.mday-modal{display:none;background:linear-gradient(135deg,#fff5f8,#fde8f0);padding:14px 28px;text-align:center;border-bottom:1px solid rgba(214,63,110,0.15)}
+.mday-modal-tag{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#d63f6e;margin-bottom:4px}
+.mday-modal-offer{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.mday-modal-note{font-family:'Montserrat',sans-serif;font-size:10px;color:#999;letter-spacing:.5px}
+.mday-modal.show{display:block}
+@media(max-width:900px){
+  .mday-hero{padding:12px 16px;margin-bottom:18px}
+  .mday-hero-offer{font-size:clamp(15px,5vw,18px)}
+}
 </style>
   <link rel="preload" as="image" href="/assets/hero/hero-desktop.webp" fetchpriority="high">
   <link rel="preload" as="image" href="/assets/video-poster-index.webp">
@@ -1015,6 +1034,13 @@ footer a:hover{color:var(--gold-lt)}
 
     <!-- CLOSE -->
     <button class="modal-close" onclick="closeModal()">&#215;</button>
+
+    <!-- MOTHER'S DAY PROMO BAR (shown by JS for Malaga + Johor Bahru only) -->
+    <div class="mday-modal" id="mdayModal">
+      <div class="mday-modal-tag">🌸 Mother&rsquo;s Day Special &middot; This Weekend Only</div>
+      <div class="mday-modal-offer">97% Off All Tickets &mdash; Online &amp; In-Person</div>
+      <div class="mday-modal-note">Offer expires Sunday 11 May 2026 at midnight</div>
+    </div>
 
     <!-- TOP BAR -->
     <div class="mbar">
@@ -1110,6 +1136,13 @@ footer a:hover{color:var(--gold-lt)}
 
       <h1 class="hero-title">YOU'VE DONE EVERYTHING RIGHT, SO WHY ARE YOU STILL NOT GETTING AHEAD?</h1>
       <p class="hero-sub" style="display:block;font-size:17px;color:var(--ink-mid);line-height:1.75;max-width:520px;margin-bottom:32px"></p>
+
+      <!-- Mother's Day Promo Strip (shown by JS for Malaga + Johor Bahru only) -->
+      <div class="mday-hero" id="mdayHero">
+        <div class="mday-hero-tag">🌸 Mother&rsquo;s Day Special &middot; This Weekend Only</div>
+        <div class="mday-hero-offer">Give Mum the Gift of Transformation &mdash; <span>97% Off</span> All Tickets</div>
+        <div class="mday-hero-deadline">Online &amp; In-Person &middot; Offer expires Sunday 11 May 2026</div>
+      </div>
 
       <button class="btn-primary" onclick="openFeatured()">Save My Seat Now &nbsp;&rarr;</button>
       <div class="hero-trust"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-clock"/></svg> Takes less than 60 seconds &middot; Limited seats per city</div>
@@ -1676,12 +1709,7 @@ footer a:hover{color:var(--gold-lt)}
 <footer>
   <p style="font-family:Cinzel,serif;font-size:14px;color:rgba(255,255,255,0.7);letter-spacing:2px;margin-bottom:12px">Millionaire Mind&reg; Intensive</p>
   <p>&copy; 2026 Success Resources &middot; All Rights Reserved</p>
-  <p style="margin-top:8px">
-    <a href="https://docs.google.com/document/d/1WWRyCrQ9jwLe8NR4A270KG3Ggyrk1D4b7Sxud95sIYo/edit" target="_blank" rel="noopener">Privacy Policy</a> &middot;
-    <a href="https://www.millionairemindworld.com/terms-and-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a> &middot;
-    <a href="https://docs.google.com/document/d/1KRQtEB5kVMEXTPBv_0IJW4sFa11wmoqM3FqyJNyKtOw/edit" target="_blank" rel="noopener">Cookies Policy</a> &middot;
-    <a href="https://www.millionairemindworld.com/sr" target="_blank" rel="noopener">Contact Us</a>
-  </p>
+  <p style="margin-top:8px"><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms &amp; Conditions</a> &middot; <a href="/cookies">Cookies Policy</a> &middot; <a href="https://www.millionairemindworld.com/sr">Contact Us</a></p>
   <p style="margin-top:16px;font-size:10px;max-width:680px;margin-left:auto;margin-right:auto;color:rgba(255,255,255,0.25)">The information presented is intended for educational purposes only. Success Resources makes no representations with respect to accuracy, applicability, or completeness. Results shown are not typical. Individual results will vary.</p>
 </footer>
 
@@ -1918,6 +1946,17 @@ function initPage(ev){
   if(hm) hm.style.display='flex';
   document.getElementById('geoLoader').classList.add('hide');
   setTimeout(()=>document.getElementById('geoLoader').style.display='none',700);
+
+  // ── Mother's Day Promo (Malaga + Johor Bahru, expires midnight 12 May 2026) ──
+  var MDAY_CITIES=['malaga','johor-bahru'];
+  var MDAY_END=new Date('2026-05-12T00:00:00');
+  if(new Date()<MDAY_END && MDAY_CITIES.indexOf(ev.citySlug)!==-1){
+    var mh=document.getElementById('mdayHero');
+    var mm=document.getElementById('mdayModal');
+    if(mh) mh.classList.add('show');
+    if(mm) mm.classList.add('show');
+  }
+
   }catch(err){
     console.error('initPage error:', err.message, err.stack);
     hideLoader();
@@ -2162,57 +2201,17 @@ async function detectGeo(){
   return '';
 }
 
-
-  // ── AC GEO TRACKING ─────────────────────────────────────────────
-  // Fires when visitor arrives from email link (?e=email@example.com)
-  function trackGeoToAC(email, city, country) {
-    if (!email) return;
-    fetch('/api/track-geo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, city: city||'', country: country||'' })
-    }).catch(function(){});
-  }
-
 (async()=>{
   function hide(){ var l=document.getElementById('geoLoader'); if(l){l.classList.add('hide');setTimeout(function(){l.style.display='none';},500);} }
 
-  var emailParam = new URLSearchParams(window.location.search).get('e');
-
   try{
-    // 1. Geo detect — always run (needed for both city matching AND tracking)
-    var countryCode = '', geoCity = '', geoCountry = '';
-    try{
-      var ctrl = new AbortController();
-      var tid  = setTimeout(function(){ ctrl.abort(); }, 2500);
-      var geoRes = await fetch('https://ipapi.co/json/', { signal: ctrl.signal });
-      clearTimeout(tid);
-      if(geoRes.ok){
-        var geo = await geoRes.json();
-        countryCode = geo.country_code  || '';
-        geoCity     = geo.city          || '';
-        geoCountry  = geo.country_name  || '';
-      }
-    }catch(geoErr){}
-
-    // 2. Pick city — path/param first, then geo match, then next upcoming
     var pathSlug  = window.location.pathname.replace(/^\/+|\/+$/g,'');
     var cityParam = new URLSearchParams(window.location.search).get('city');
     var slugCheck = pathSlug || cityParam;
     var ev = null;
-    if(slugCheck) ev = EVENTS.find(function(e){ return e.citySlug===slugCheck; });
-    if(!ev){
-      var now = new Date();
-      var up  = EVENTS.filter(function(e){ return e.eventDate>now; })
-                      .sort(function(a,b){ return a.eventDate-b.eventDate; });
-      ev = (countryCode && up.find(function(e){ return e.geo&&e.geo.includes(countryCode); }))
-           || up[0] || EVENTS[0];
-    }
+    if(slugCheck) ev = EVENTS.find(function(e){ return e.citySlug === slugCheck; });
+    if(!ev) ev = EVENTS.filter(function(e){ return e.eventDate > new Date(); }).sort(function(a,b){ return a.eventDate-b.eventDate; })[0] || EVENTS[0];
     initPage(ev);
-
-    // 3. Track to AC if from email link — fires after page loads, silent
-    if(emailParam) trackGeoToAC(emailParam, geoCity, geoCountry);
-
   }catch(e){
     console.error('Boot error:',e);
     try{ initPage(EVENTS[0]); }catch(e2){}
