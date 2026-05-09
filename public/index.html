@@ -2207,6 +2207,7 @@ async function detectGeo(){
   try{
     var pathSlug  = window.location.pathname.replace(/^\/+|\/+$/g,'');
     var cityParam = new URLSearchParams(window.location.search).get('city');
+    if(cityParam) cityParam = cityParam.split(/[?#&]/)[0].trim().toLowerCase();
     var slugCheck = pathSlug || cityParam;
     var ev = null;
     if(slugCheck) ev = EVENTS.find(function(e){ return e.citySlug === slugCheck; });
